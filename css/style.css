@@ -1,0 +1,51 @@
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #faf9f6;
+  color: #264b3b;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  padding: 25px;
+  background-color: #d9f1e0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  color: #348667;
+}
+
+header p {
+  margin-bottom: 0;
+}
+
+main {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.welcome {
+  padding: 35px;
+  background-color: #d9f1e0;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background-color: white;
+  padding: 25px;
+  margin-bottom: 20px;
+  border: 1px solid #dfeae2;
+  border-radius: 15px;
+}
+
+h2 {
+  color: #348667;
+}
