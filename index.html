@@ -1,0 +1,321 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ambagala | Barkada Trip Wallet</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="brand">
+    <div class="flower">✿</div>
+    <div>
+      <b>ambagala.</b>
+      <small>Sama sa gala, share sa gastos!</small>
+    </div>
+  </div>
+
+  <p class="nav-title">YOUR TRIP</p>
+
+  <nav>
+    <button class="nav active" data-page="home">⌂ &nbsp; Home</button>
+    <button class="nav" data-page="group">♧ &nbsp; Group &amp; Budget</button>
+    <button class="nav" data-page="expenses">▤ &nbsp; Expenses</button>
+    <button class="nav" data-page="balances">♡ &nbsp; Balances</button>
+  </nav>
+
+  <div class="sidebar-budget">
+    <small>BUDGET PER MEMBER</small>
+    <strong id="sideEach">—</strong>
+    <small>Starting budget per member</small>
+  </div>
+</aside>
+
+<main>
+  <header class="top">
+    <div>
+      <small class="eyebrow">YOUR BARKADA TRIP WALLET ✿</small>
+      <h1>Sama sa gala, <em>share sa gastos!</em></h1>
+      <p>Less kwentahan, more kwentuhan.</p>
+    </div>
+    <div class="flower top-flower">✿</div>
+  </header>
+
+  <!-- HOME -->
+  <section class="page active" id="home">
+    <div class="hero">
+      <div>
+        <small class="eyebrow">WELCOME TO AMBAGALA</small>
+        <h2>Good times are better<br>when everyone <em>shares.</em></h2>
+        <p>Track your barkada budget and everyone's remaining money.</p>
+        <button class="primary" data-go="expenses">+ Add an Expense</button>
+      </div>
+
+      <div class="cat-frame">
+        <img
+          src="./images/cat-wallet.jpg"
+          alt="Cat holding an empty wallet"
+          onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+        <span hidden>🐱👛</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="panel stat">
+        <small>Group Budget</small>
+        <strong id="homeBudget">—</strong>
+      </div>
+      <div class="panel stat">
+        <small>Total Spent</small>
+        <strong id="homeSpent">—</strong>
+      </div>
+      <div class="panel stat">
+        <small>Remaining</small>
+        <strong id="homeRemaining">—</strong>
+      </div>
+      <div class="panel stat">
+        <small>Members</small>
+        <strong id="homeCount">—</strong>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="heading-row">
+        <h3>✿ Every Member's Remaining Budget</h3>
+        <button class="secondary" data-go="group">
+          Manage Members
+        </button>
+      </div>
+
+      <p>Every member's gastos is deducted from their personal budget.</p>
+      <div id="homeCards" class="member-grid"></div>
+    </div>
+  </section>
+
+  <!-- GROUP & BUDGET -->
+  <section class="page" id="group">
+    <div class="heading-row">
+      <div>
+        <small class="eyebrow">PLAN YOUR ADVENTURE</small>
+        <h2>Group &amp; Budget</h2>
+      </div>
+
+      <button class="danger" id="newTrip">
+        Start New Trip
+      </button>
+    </div>
+
+    <div class="two-col">
+      <div class="panel">
+        <h3>Trip Settings</h3>
+
+        <form id="settingsForm" novalidate>
+          <label>
+            Trip Name
+            <input
+              id="tripName"
+              type="text"
+              maxlength="70"
+              placeholder="e.g. Mati Beach Trip">
+          </label>
+
+          <label>
+            Group Budget (₱)
+            <input
+              id="budget"
+              type="number"
+              min="500.01"
+              step="0.01"
+              placeholder="Enter budget above ₱500">
+          </label>
+
+          <label>
+            Number of Members
+            <input
+              id="count"
+              type="number"
+              min="1"
+              max="20"
+              step="1"
+              placeholder="Enter 1 to 20 members">
+          </label>
+
+          <p class="error" id="settingsError" role="alert"></p>
+
+          <button class="primary" type="submit">
+            Save Trip Settings
+          </button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <h3>Add Your Members</h3>
+        <p>Only the names you enter will appear.</p>
+
+        <form id="memberForm" novalidate>
+          <label>
+            Member Name
+            <input
+              id="memberName"
+              type="text"
+              maxlength="70"
+              placeholder="Enter member name">
+          </label>
+
+          <p class="error" id="memberError" role="alert"></p>
+
+          <button class="primary" type="submit">
+            + Add Member
+          </button>
+        </form>
+
+        <div id="memberList" class="chips"></div>
+      </div>
+    </div>
+
+    <div class="panel section-space">
+      <h3>Individual Member Budgets</h3>
+      <div id="groupCards" class="member-grid"></div>
+    </div>
+  </section>
+
+  <!-- EXPENSES -->
+  <section class="page" id="expenses">
+    <small class="eyebrow">SHARED SPENDING</small>
+    <h2>Expenses</h2>
+
+    <div class="two-col">
+      <div class="panel">
+        <h3 id="formTitle">Add Expense</h3>
+
+        <form id="expenseForm" novalidate>
+          <label>
+            Expense Name
+            <input
+              id="expenseName"
+              type="text"
+              list="expenseChoices"
+              maxlength="90"
+              placeholder="Choose or type an expense">
+          </label>
+
+          <datalist id="expenseChoices">
+            <option value="Breakfast">
+            <option value="Lunch">
+            <option value="Dinner">
+            <option value="Snacks">
+            <option value="Drinks">
+            <option value="Transportation Fare">
+            <option value="Gasoline">
+            <option value="Hotel">
+            <option value="Entrance Fee">
+            <option value="Parking Fee">
+            <option value="Groceries">
+            <option value="Other">
+          </datalist>
+
+          <label>
+            Amount (₱)
+            <input
+              id="expenseAmount"
+              type="number"
+              min="0.01"
+              step="0.01"
+              placeholder="Enter expense amount">
+          </label>
+
+          <label>
+            Category
+            <select id="category">
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Accommodation">Accommodation</option>
+              <option value="Activities">Activities</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
+
+          <label>
+            Who Paid?
+            <select id="payer">
+              <option value="">Select a member</option>
+            </select>
+          </label>
+
+          <fieldset>
+            <legend>Split With</legend>
+            <div id="participants" class="checks"></div>
+          </fieldset>
+
+          <p class="hint">
+            Check the members who shared this expense.
+            Unchecked members will not be charged.
+          </p>
+
+          <p class="error" id="expenseError" role="alert"></p>
+
+          <button class="primary" id="expenseSubmit" type="submit">
+            + Add Expense
+          </button>
+
+          <button
+            type="button"
+            class="secondary"
+            id="cancelEdit"
+            hidden>
+            Cancel
+          </button>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="heading-row">
+          <h3>Expense History</h3>
+          <button class="secondary" id="export" type="button">
+            Export CSV
+          </button>
+        </div>
+
+        <input id="search" placeholder="Search expenses">
+        <div id="expenseList"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BALANCES -->
+  <section class="page" id="balances">
+    <small class="eyebrow">KEEP IT FAIR</small>
+    <h2>Balances</h2>
+
+    <div class="two-col">
+      <div class="panel">
+        <h3>Who Owes Whom?</h3>
+        <div id="debts"></div>
+
+        <h3 class="section-space">Net Member Balances</h3>
+        <div id="net"></div>
+
+        <h3 class="section-space">Settlement History</h3>
+        <div id="settlements"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Individual Remaining Budgets</h3>
+        <div id="balanceCards" class="member-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    ✿ Ambagala · Sama sa gala, share sa gastos!
+  </footer>
+</main>
+
+<div id="toast" role="status" hidden></div>
+
+<script type="module" src="./js/controller.js"></script>
+</body>
+</html>
